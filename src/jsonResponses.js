@@ -1,6 +1,4 @@
 
-const testData = require('./test.json');
-
 const crypto = require('crypto');
 
 let drinks = {};
