@@ -1,0 +1,13 @@
+{
+  "name": "proj1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+   "start": "node ./src/server.js",
+        "pretest": "eslint ./src --fix",
+        "test": "echo \"Test Complete\""
+  },
+  "author": "Isaac Selleck",
+  "license": "ISC"
+}

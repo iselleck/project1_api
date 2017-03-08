@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Rate my Drink</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script type="text/babel">
+
+ const parseJSON = (xhr, content) => {
+      const obj = JSON.parse(xhr.response);
+      console.dir(obj);
+      
+      if(obj.drinks) {
+          
+          content.innerHTML = "";
+          
+        let keys = Object.keys(obj.drinks);
+          console.log(keys);
+          
+        for(let i = 0; i < keys.length; i++){
+            
+            const pinDiv = document.createElement('div');
+            pinDiv.className = "pinThumb";
+            pinDiv.innerHTML = '<p>'+ obj.drinks[keys[i]].name +'</p> <img src='+obj.drinks[keys[i]].imgurl+' width="200px" height="200px" />';
+            
+           // const drawCall = draws[keys[i]];
+            const imgThumb = new Image(150,150);
+            imgThumb.src = obj.drinks[keys[i]].imgurl;
+            
+        const drinkList = document.createElement('p');
+        const drinks = JSON.stringify(obj.drinks[keys[i]].name);
+        drinkList.textContent = drinks + " " + obj.drinks[keys[i]].age;
+        content.appendChild(pinDiv);
+    
+        };
+          
+      
+      }
+    };
+
+
+const handleResponse = (xhr, paresResponse) => {
+   
+    const content = document.querySelector('#content');
+    
+    console.log(xhr.getResponseHeader ('etag'));
+    
+    console.log(xhr.status);
+      
+      //check the status code
+      switch(xhr.status) {
+        case 200: //success
+        
+          break;
+        case 201: //created
+        
+          break;
+        case 204: 
+      
+          return;
+        case 304:
+     
+          break;
+        case 400: 
+       return false;
+          break;
+        case 404:
+              return false;
+              break;
+       
+        default: 
+     
+          break;
+      }
+    
+    
+    
+    if(paresResponse){
+     parseJSON(xhr, content);
+    } else {
+        console.log('recieved ')
+    }
+    
+};
+
+const sendAjax = (e) => {
+    
+    
+    const method = "GET";
+    
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, '/getDrinks');
+  
+      xhr.setRequestHeader('Accept', 'application/json');
+
+      
+        xhr.onload = () => handleResponse(xhr, true);
+      
+      
+      xhr.send();
+      
+      e.preventDefault();
+    
+      return false;
+    
+};
+
+ 
+    const sendPost = (e, drinkForm) => {
+      
+      const drinkAction = drinkForm.getAttribute('action');
+      const drinkMethod = drinkForm.getAttribute('method');
+      
+      const nameField = drinkForm.querySelector('#nameField');
+      const compField = drinkForm.querySelector('#compField');
+      const imgField = drinkForm.querySelector('#imgField');
+        
+        
+        if(nameField == "" || compField == "" || imgField == ""){
+            return false;
+        };
+      
+      const xhr = new XMLHttpRequest();
+      
+      xhr.open(drinkMethod, drinkAction);
+      
+     
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+     
+      xhr.setRequestHeader ('Accept', 'application/json');
+      
+   
+      xhr.onload = () => handleResponse(xhr, true);
+      
+      const formData = `name=${nameField.value}&age=${compField.value}&imgurl=${imgField.value}`;
+      
+      
+      xhr.send(formData);
+    
+      
+      e.preventDefault();
+    drinkForm.reset();
+      
+      return false;
+    };
+
+const init = () => {
+    const drinkForm = document.querySelector('#drinkForm');
+    
+    const getDrinks = (e) => sendAjax(e);
+     const addDrink = (e) => {
+         sendPost(e, drinkForm);
+        sendAjax(e);
+            };
+    
+    drinkForm.addEventListener('submit', addDrink);
+    
+    
+};
+
+window.onload = init();
+
+  </script>
+</head>
+<body>
+  <section id="top">
+    <h3>Rate My Drink</h3>
+      <p>Fill out the form to add a drink to the list</p>   
+    <form id="drinkForm" action="/addDrink" method="post">
+      <label for="name">Name: </label>
+      <input id="nameField" type="text" name="name" />
+      <label for="company">Company: </label>
+      <input id="compField" type="text" name="compnay" />
+        
+        <label for="pinImg">Image URL: </label>
+        <input id="imgField" type="text" name="pinImg" /> 
+        
+      <input type="submit" value="Add Drink" />
+    </form>
+    
+  </section>
+  <section id="content">
+  </section>
+</body>
+</html>
