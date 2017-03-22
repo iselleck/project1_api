@@ -30,7 +30,9 @@
             
         const drinkList = document.createElement('p');
         const drinks = JSON.stringify(obj.drinks[keys[i]].name);
-        drinkList.textContent = drinks + " " + obj.drinks[keys[i]].age;
+        drinkList.textContent = drinks + " " + obj.drinks[keys[i]].company;
+        
+        pinDiv.onclick = (e) => sendAjax(e, `/drink/${obj.drinks[keys[i]].name}`);
         content.appendChild(pinDiv);
     
         };
@@ -84,13 +86,14 @@ const handleResponse = (xhr, paresResponse) => {
     
 };
 
-const sendAjax = (e) => {
+const sendAjax = (e, url) => {
     
+    console.log(url);
     
     const method = "GET";
     
       const xhr = new XMLHttpRequest();
-      xhr.open(method, '/getDrinks');
+      xhr.open(method, url);
   
       xhr.setRequestHeader('Accept', 'application/json');
 
@@ -115,9 +118,11 @@ const sendAjax = (e) => {
       const nameField = drinkForm.querySelector('#nameField');
       const compField = drinkForm.querySelector('#compField');
       const imgField = drinkForm.querySelector('#imgField');
+      const descField = drinkForm.querySelector('#descField');
         
         
         if(nameField == "" || compField == "" || imgField == ""){
+       
             return false;
         };
       
@@ -133,7 +138,7 @@ const sendAjax = (e) => {
    
       xhr.onload = () => handleResponse(xhr, true);
       
-      const formData = `name=${nameField.value}&age=${compField.value}&imgurl=${imgField.value}`;
+      const formData = `name=${nameField.value}&company=${compField.value}&imgurl=${imgField.value}&desc=${descField.value}`;
       
       
       xhr.send(formData);
@@ -148,14 +153,14 @@ const sendAjax = (e) => {
 const init = () => {
     const drinkForm = document.querySelector('#drinkForm');
     
-    const getDrinks = (e) => sendAjax(e);
+    const getDrinks = (e) => sendAjax(e, '/getDrinks');
      const addDrink = (e) => {
          sendPost(e, drinkForm);
         sendAjax(e);
             };
     
     drinkForm.addEventListener('submit', addDrink);
-    
+    getDrinks();
     
 };
 
@@ -164,22 +169,31 @@ window.onload = init();
   </script>
 </head>
 <body>
-  <section id="top">
+  <section id="side">
     <h3>Rate My Drink</h3>
       <p>Fill out the form to add a drink to the list</p>   
     <form id="drinkForm" action="/addDrink" method="post">
-      <label for="name">Name: </label>
+      
+      <label for="name">Name </label>
       <input id="nameField" type="text" name="name" />
-      <label for="company">Company: </label>
+    
+        
+        
+      <label for="company">Company </label>
       <input id="compField" type="text" name="compnay" />
         
-        <label for="pinImg">Image URL: </label>
+        <label for="pinImg">Image URL </label>
         <input id="imgField" type="text" name="pinImg" /> 
+        
+        <label for="desc">Description </label>
+        <textarea id="descField" type="text" name="desc"></textarea>
         
       <input type="submit" value="Add Drink" />
     </form>
-    
+      
+      
   </section>
+    
   <section id="content">
   </section>
 </body>

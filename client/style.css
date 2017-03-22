@@ -3,11 +3,16 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+    background-color: honeydew;
 }
 
-#top {
+#side {
   text-align: center;
   margin: 0 auto;
+    float: left;
+    height: 100%;
+    width: 25%;
+    background-color: #fff0ff;
 }
 
 #top h1 {
@@ -15,15 +20,47 @@ html, body {
 }
 
 #content {
-  margin-top: 100px;
+    width: 75%;
+  margin-top: 25px;
   font-size: 2em;
   text-align: center;
+    display: inline-block;
 }
 
 .pinThumb {
     box-shadow: 0px 0px 10px 2px lightgray;
     display: inline-block;
+    float: left;
     max-width: 200px;
     max-height: 300px;
     margin-left: 2%;
+    margin-top: 25px;
+}
+
+.pinThumb:hover{
+    cursor: pointer;
+} 
+
+#drinkForm{
+    display: inline-block;
+}
+
+#drinkForm input{
+    display: block;
+    margin-bottom: 5px;
+    border-color: lightgrey;
+    border-width: 1px;
+    width: 250px;
+}
+
+#descField{
+    height: 100px; 
+    display: block;
+    width: 245px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+#drinkForm label{
+    padding-bottom: 10px;
 }

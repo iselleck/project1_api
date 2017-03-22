@@ -1,7 +1,38 @@
 
 const crypto = require('crypto');
 
-let drinks = {};
+let drinks = {
+    "White": {
+    "name": "white",
+    "company": "Allagash",
+    "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png"
+    },
+    "Magic":{
+	"imgurl": "http://www.magichat.net/img/elixirs/bottleswithpints/9.png",
+    "name": "No. 9",
+	"company": "Magic Hat Brewery"
+    },
+     "Tropicana": {
+    "name": "Orange Juice",
+    "company": "Tropicana",
+    "imgurl": "http://www.theyoungmommylife.com/wp-content/uploads/2012/06/4850030102CF.png"
+    },
+    "ocaen cran":{
+	"imgurl": "http://supplybox.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/o/c/ocean-spray-cranberry.png",
+    "name": "Cranberry",
+	"company": "Ocean Spray"
+    },
+       "Cupcake Chardonnay": {
+    "name": "Chardonay",
+    "company": "Cupcake",
+    "imgurl": "http://2.bp.blogspot.com/-fUEQ1T-q9so/T-pHNHW4N3I/AAAAAAAACPc/07bz5r_BxQc/s1600/wine-chardonnay.png"
+    },
+    "Hendrick's":{
+	"imgurl": "https://www.laithwaites.co.uk/images/uk/en/law/product/73152b.png",
+    "name": "Hendrick's gin",
+	"company": "Hendricks"
+    }
+};
 
 let etag = crypto.createHash('sha1').update(JSON.stringify(drinks));
 let digest = etag.digest('hex');
@@ -38,8 +69,6 @@ const getDrinks = (request, response) => {
   const responseJSON = {
     drinks,
   };
-    
-
  return respondJSON(request, response, 200, responseJSON);
 };
 
@@ -66,10 +95,10 @@ const notFoundMeta = (request, response) => {
 const addDrink = (request, response, body) => {
   // default json message
   const responseJSON = {
-    message: 'Name and age are both required.',
+    message: 'Name and company are both required.',
   };
 
-  if (!body.name || !body.age) {
+  if (!body.name || !body.company) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -81,11 +110,13 @@ const addDrink = (request, response, body) => {
     responseCode = 204;
   } else {
     drinks[body.name] = {};
+        drinks[body.name].name = body.name;
+  drinks[body.name].company = body.company;
+  drinks[body.name].imgurl = body.imgurl;
+  drinks[body.name].desc = body.desc;
   }
 
-  drinks[body.name].name = body.name;
-  drinks[body.name].age = body.age;
-    drinks[body.name].imgurl = body.imgurl;
+
 
   
   if (responseCode === 201) {
