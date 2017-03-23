@@ -156,7 +156,7 @@ const init = () => {
     const getDrinks = (e) => sendAjax(e, '/getDrinks');
      const addDrink = (e) => {
          sendPost(e, drinkForm);
-        sendAjax(e);
+        getDrinks();
             };
     
     drinkForm.addEventListener('submit', addDrink);

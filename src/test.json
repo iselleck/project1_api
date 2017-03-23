@@ -19,8 +19,7 @@
  
  { "magic":{
 	"imgurl": "http://www.magichat.net/img/elixirs/bottleswithpints/9.png",
-    "name": "No. 9",
-	"company": "Magic Hat Brewery",
+    "name": "No. 9",	"company": "Magic Hat Brewery",
 	"about": "Hi, i'm a description",
 	"tags": [
 		"nisi",

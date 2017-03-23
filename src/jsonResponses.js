@@ -3,34 +3,34 @@ const crypto = require('crypto');
 
 let drinks = {
     "White": {
-    "name": "white",
+    "name": "White",
     "company": "Allagash",
     "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png"
     },
-    "Magic":{
+    "No. 9":{
 	"imgurl": "http://www.magichat.net/img/elixirs/bottleswithpints/9.png",
     "name": "No. 9",
 	"company": "Magic Hat Brewery"
     },
-     "Tropicana": {
-    "name": "Orange Juice",
+     "orange juice": {
+    "name": "orange juice",
     "company": "Tropicana",
     "imgurl": "http://www.theyoungmommylife.com/wp-content/uploads/2012/06/4850030102CF.png"
     },
-    "ocaen cran":{
+    "Cranberry":{
 	"imgurl": "http://supplybox.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/o/c/ocean-spray-cranberry.png",
     "name": "Cranberry",
 	"company": "Ocean Spray"
     },
-       "Cupcake Chardonnay": {
-    "name": "Chardonay",
+       "Chardonnay": {
+    "name": "Chardonnay",
     "company": "Cupcake",
     "imgurl": "http://2.bp.blogspot.com/-fUEQ1T-q9so/T-pHNHW4N3I/AAAAAAAACPc/07bz5r_BxQc/s1600/wine-chardonnay.png"
     },
     "Hendrick's":{
 	"imgurl": "https://www.laithwaites.co.uk/images/uk/en/law/product/73152b.png",
-    "name": "Hendrick's gin",
-	"company": "Hendricks"
+    "name": "Hendrick's",
+	"company": "Hendrick's"
     }
 };
 
@@ -77,6 +77,7 @@ const getDrinksMeta = (request, response) => {
       return respondJSONMeta(request, response, 304);
   }  
 };
+
 
 const notFound = (request, response) => {
   const responseJSON = {
@@ -127,8 +128,30 @@ const addDrink = (request, response, body) => {
   return respondJSONMeta(request, response, responseCode);
 };
 
+
+const getDrinkPage = (request, response, typ) => {
+    
+    let fixedType = typ;
+    
+    if( typ.includes("%20", 0) ){
+        
+       fixedType = typ.replace("%20", " ");
+      
+    }
+    
+      console.log(drinks[fixedType]);
+    
+    const requestedDrink = drinks[fixedType];
+    
+    const responseJSON = {
+      requestedDrink,
+    };
+    return respondJSON(request, response, 200, responseJSON);
+};
+
 // public exports
 module.exports = {
+    getDrinkPage,
   getDrinks,
     getDrinksMeta,
     notFound,
