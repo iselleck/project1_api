@@ -43,10 +43,10 @@ const handlePost = (request, response, parsedUrl) => {
 const handleGet = (request, response, parsedUrl) => {
     
     const sUrl = parsedUrl.pathname.split('/');
-    console.log(sUrl[1]);
-    console.log(sUrl[2]);
+//    console.log(sUrl[1]);
+//    console.log(sUrl[2]);
     
-    if(sUrl[1] === 'drink'){
+    if(sUrl[1] === 'drink' && sUrl[2] !== undefined){
         jsonHandler.getDrinkPage(request, response, sUrl[2]);
     }
    else if (parsedUrl.pathname === '/') {

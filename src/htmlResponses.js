@@ -1,4 +1,5 @@
 const fs = require('fs');  // pull in the file system module
+const jsonHandler = require('./jsonResponses.js');
 
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
 const css = fs.readFileSync(`${__dirname}/../client/style.css`);

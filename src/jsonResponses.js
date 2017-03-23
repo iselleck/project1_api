@@ -5,32 +5,38 @@ let drinks = {
     "White": {
     "name": "White",
     "company": "Allagash",
-    "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png"
+    "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png",
+        "desc": "One of my personal favorites"
     },
     "No. 9":{
 	"imgurl": "http://www.magichat.net/img/elixirs/bottleswithpints/9.png",
     "name": "No. 9",
-	"company": "Magic Hat Brewery"
+	"company": "Magic Hat Brewery",
+        "desc": "Not quite pale ale from Vermont. Is good"
     },
      "orange juice": {
     "name": "orange juice",
     "company": "Tropicana",
-    "imgurl": "http://www.theyoungmommylife.com/wp-content/uploads/2012/06/4850030102CF.png"
+    "imgurl": "http://www.theyoungmommylife.com/wp-content/uploads/2012/06/4850030102CF.png",
+         "desc": "OJ more like necter of the gods"
     },
     "Cranberry":{
 	"imgurl": "http://supplybox.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/o/c/ocean-spray-cranberry.png",
     "name": "Cranberry",
-	"company": "Ocean Spray"
+	"company": "Ocean Spray",
+        "desc": "Cran it Gran"
     },
        "Chardonnay": {
     "name": "Chardonnay",
     "company": "Cupcake",
-    "imgurl": "http://2.bp.blogspot.com/-fUEQ1T-q9so/T-pHNHW4N3I/AAAAAAAACPc/07bz5r_BxQc/s1600/wine-chardonnay.png"
+    "imgurl": "http://2.bp.blogspot.com/-fUEQ1T-q9so/T-pHNHW4N3I/AAAAAAAACPc/07bz5r_BxQc/s1600/wine-chardonnay.png",
+    "desc": "Don't have much money but don't want to buy yellowtail or Barefoot? Well I've got a wine for you!"
     },
     "Hendrick's":{
 	"imgurl": "https://www.laithwaites.co.uk/images/uk/en/law/product/73152b.png",
     "name": "Hendrick's",
-	"company": "Hendrick's"
+	"company": "Hendrick's",
+    "desc": "It's a gin"
     }
 };
 

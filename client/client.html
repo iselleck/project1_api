@@ -7,9 +7,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
 
- const parseJSON = (xhr, content) => {
+ const parseJSON = (xhr, content, info) => {
       const obj = JSON.parse(xhr.response);
-      console.dir(obj);
+      //console.dir(obj);
       
       if(obj.drinks) {
           
@@ -39,13 +39,23 @@
           
       
       }
+     
+     else if (obj.requestedDrink) {
+        
+       //  const testDesc = document.createElement('div');
+         
+         info.innerHTML = `<p>Name: ${obj.requestedDrink.name} <br>Company: ${obj.requestedDrink.company} <br> Review: ${obj.requestedDrink.desc}</p>`;
+         
+     //    content.appendChild(testDesc);
+     }
     };
 
 
 const handleResponse = (xhr, paresResponse) => {
    
     const content = document.querySelector('#content');
-    
+    const info = document.querySelector('#drinkInfo');
+        
     console.log(xhr.getResponseHeader ('etag'));
     
     console.log(xhr.status);
@@ -79,7 +89,7 @@ const handleResponse = (xhr, paresResponse) => {
     
     
     if(paresResponse){
-     parseJSON(xhr, content);
+     parseJSON(xhr, content, info);
     } else {
         console.log('recieved ')
     }
@@ -191,6 +201,9 @@ window.onload = init();
       <input type="submit" value="Add Drink" />
     </form>
       
+      <div id="drinkInfo">
+          
+      </div>
       
   </section>
     
