@@ -1,8 +1,8 @@
 
 const crypto = require('crypto');
 
-let drinks = {
-    "White": {
+const drinks = {
+    "Allagash White": {
     "name": "Allagash White",
     "company": "Allagash Brewery",
     "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png",
@@ -183,7 +183,7 @@ const sortDrinks = (request, response, query) => {
         if(drinks[keys[i]].type === querys[1]){
             
             if(sortedDrinks[drinks[keys[i]].name]){
-                
+               // empty
             }else{
             sortedDrinks[drinks[keys[i]].name] = drinks[keys[i]];
             }
