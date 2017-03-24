@@ -3,59 +3,59 @@ const crypto = require('crypto');
 
 let drinks = {
     "White": {
-    "name": "White",
+    "name": "Allagash White",
     "company": "Allagash Brewery",
     "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png",
-        "desc": "One of my personal favorites",
+        "desc": "Excellent  Belgian white beer. One of my personal favorites.",
         "type": "beer",
     },
     "No. 9":{
 	"imgurl": "http://www.magichat.net/img/elixirs/bottleswithpints/9.png",
     "name": "No. 9",
 	"company": "Magic Hat Brewery",
-        "desc": "Not quite pale ale from Vermont. Is good",
+        "desc": "Not quite a pale ale from Vermont. It's tasty.",
         "type": "beer",
     },
      "orange juice": {
     "name": "orange juice",
     "company": "Tropicana",
     "imgurl": "http://www.theyoungmommylife.com/wp-content/uploads/2012/06/4850030102CF.png",
-         "desc": "OJ more like necter of the gods",
+         "desc": "On the first sip I wasn't sold. As a proponent of pulp I felt cheated. After the second sip my life has totally  changed and its safe to say this is the nectar of the gods.",
          "type": "juice",
     },
     "Cranberry":{
 	"imgurl": "http://supplybox.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/o/c/ocean-spray-cranberry.png",
     "name": "Cranberry",
 	"company": "Ocean Spray",
-        "desc": "Cran it Gran",
+        "desc": "Its cranberry juice... its pretty good",
         "type": "juice",
     },
        "Chardonnay": {
     "name": "Chardonnay",
     "company": "Cupcake",
     "imgurl": "http://2.bp.blogspot.com/-fUEQ1T-q9so/T-pHNHW4N3I/AAAAAAAACPc/07bz5r_BxQc/s1600/wine-chardonnay.png",
-    "desc": "Don't have much money but don't want to buy yellowtail or Barefoot? Well I've got a wine for you!",
+    "desc": "I have very little knowledge  of wine. I didn't mind this one",
            "type": "wine",
     },
     "Hendrick's":{
 	"imgurl": "https://www.laithwaites.co.uk/images/uk/en/law/product/73152b.png",
     "name": "Hendrick's",
 	"company": "William Grant & Sons",
-    "desc": "It's a gin",
+    "desc": "It's a gin. Tastes like pine needles with a hint of cucumber",
     "type": "liquor",
     },
      "Coke":{
 	"imgurl": "http://www.pngpix.com/wp-content/uploads/2016/03/Coca-Cola-Bottle-PNG-image.png",
     "name": "Coke",
 	"company": "Coca-Cola",
-    "desc": "Yum",
+    "desc": "I can't get enough of this stuff!!! It's slowly dissolving my teeth but I want more!",
     "type": "soda",
     },
       "Mountain Dew":{
 	"imgurl": "http://vignette2.wikia.nocookie.net/mountaindew/images/9/91/Mdbottle_zps52ac0b35.png/revision/latest?cb=20140727190433",
     "name": "Mountain Dew",
 	"company": "PepsiCo",
-    "desc": "Yum",
+    "desc": "Paired with nacho chees doritos, would highly recomend.",
     "type": "soda",
     }
 };
@@ -159,8 +159,6 @@ const addDrink = (request, response, body) => {
 const getDrinkPage = (request, response, typ) => {
     
     let fixedType = decodeURI(typ);
-       
-    //console.log(drinks[fixedType]);
     
     const requestedDrink = drinks[fixedType];
     
@@ -172,9 +170,7 @@ const getDrinkPage = (request, response, typ) => {
 
 const sortDrinks = (request, response, query) => {
     const querys = query.split('=');
-    let sortedDrinks = {};
-    
-   
+    let sortedDrinks = {}; 
     
     let keys = Object.keys(drinks);
     

@@ -43,8 +43,6 @@ const handlePost = (request, response, parsedUrl) => {
 const handleGet = (request, response, parsedUrl) => {
     
     const sUrl = parsedUrl.pathname.split('/');
-//    console.log(sUrl[1]);
-//    console.log(sUrl[2]);
     
     if(sUrl[1] === 'drink' && sUrl[2] !== undefined){
         jsonHandler.getDrinkPage(request, response, sUrl[2]);
@@ -57,9 +55,7 @@ const handleGet = (request, response, parsedUrl) => {
     htmlHandler.getCSS(request, response);
   } else if (parsedUrl.pathname === '/getDrinks') {
     jsonHandler.getDrinks(request, response);
-      } else if (parsedUrl.pathname === '/getTest') {
-    jsonHandler.getTest(request, response);
-  } else if (parsedUrl.pathname === '/notReal') {
+      } else if (parsedUrl.pathname === '/notReal') {
     jsonHandler.notFound(request, response);
   } else {
     jsonHandler.notFound(request, response);
@@ -80,9 +76,7 @@ const onRequest = (request, response) => {
   // parse url into individual parts
   // returns an object of url parts by name
   const parsedUrl = url.parse(request.url);
-
-//    console.log(parsedUrl);
-//    
+ 
   // check if method was POST, otherwise assume GET
   // for the sake of this example
   if (request.method === 'POST') {
