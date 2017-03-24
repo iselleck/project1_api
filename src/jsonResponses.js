@@ -4,7 +4,7 @@ const crypto = require('crypto');
 let drinks = {
     "White": {
     "name": "White",
-    "company": "Allagash",
+    "company": "Allagash Brewery",
     "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png",
         "desc": "One of my personal favorites",
         "type": "beer",
@@ -40,9 +40,23 @@ let drinks = {
     "Hendrick's":{
 	"imgurl": "https://www.laithwaites.co.uk/images/uk/en/law/product/73152b.png",
     "name": "Hendrick's",
-	"company": "Hendrick's",
+	"company": "William Grant & Sons",
     "desc": "It's a gin",
     "type": "liquor",
+    },
+     "Coke":{
+	"imgurl": "http://www.pngpix.com/wp-content/uploads/2016/03/Coca-Cola-Bottle-PNG-image.png",
+    "name": "Coke",
+	"company": "Coca-Cola",
+    "desc": "Yum",
+    "type": "soda",
+    },
+      "Mountain Dew":{
+	"imgurl": "http://vignette2.wikia.nocookie.net/mountaindew/images/9/91/Mdbottle_zps52ac0b35.png/revision/latest?cb=20140727190433",
+    "name": "Mountain Dew",
+	"company": "PepsiCo",
+    "desc": "Yum",
+    "type": "soda",
     }
 };
 
@@ -127,6 +141,7 @@ const addDrink = (request, response, body) => {
   drinks[body.name].company = body.company;
   drinks[body.name].imgurl = body.imgurl;
   drinks[body.name].desc = body.desc;
+  drinks[body.name].type = body.type;
   }
 
 
@@ -157,11 +172,15 @@ const getDrinkPage = (request, response, typ) => {
 
 const sortDrinks = (request, response, query) => {
     const querys = query.split('=');
-    const sortedDrinks = {};
+    let sortedDrinks = {};
     
    
     
     let keys = Object.keys(drinks);
+    
+    if(querys[1] === 'all'){
+        return getDrinks(request, response);
+    } else {
     
     for(let i = 0; i < keys.length; i++){
     
@@ -174,6 +193,7 @@ const sortDrinks = (request, response, query) => {
             }
         }
     };
+    }
     
      const responseJSON = {
          sortedDrinks,

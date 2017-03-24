@@ -3,7 +3,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-    background-color: honeydew;
+    background-color: #F8F9FF;
 }
 
 #side {
@@ -12,8 +12,10 @@ html, body {
     float: left;
     height: 100%;
     width: 25%;
-    background-color: #fff0ff;
+    background-color: #dfe3ff;
 }
+
+
 
 #top h1 {
   font-size: 2em;
@@ -64,4 +66,18 @@ html, body {
 #drinkForm label{
     padding-bottom: 10px;
 }
+
+#typeField{
+    margin-bottom: 10px;
+}
+
+#filters{
+    margin-top: 10px;
+}
+
+.smImg{
+    display: block;
+    margin: auto;
+}
+
 
