@@ -6,37 +6,43 @@ let drinks = {
     "name": "White",
     "company": "Allagash",
     "imgurl": "http://www.allagash.com/wp-content/uploads/Yearly_White12ozAdjusted-02.png",
-        "desc": "One of my personal favorites"
+        "desc": "One of my personal favorites",
+        "type": "beer",
     },
     "No. 9":{
 	"imgurl": "http://www.magichat.net/img/elixirs/bottleswithpints/9.png",
     "name": "No. 9",
 	"company": "Magic Hat Brewery",
-        "desc": "Not quite pale ale from Vermont. Is good"
+        "desc": "Not quite pale ale from Vermont. Is good",
+        "type": "beer",
     },
      "orange juice": {
     "name": "orange juice",
     "company": "Tropicana",
     "imgurl": "http://www.theyoungmommylife.com/wp-content/uploads/2012/06/4850030102CF.png",
-         "desc": "OJ more like necter of the gods"
+         "desc": "OJ more like necter of the gods",
+         "type": "juice",
     },
     "Cranberry":{
 	"imgurl": "http://supplybox.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/o/c/ocean-spray-cranberry.png",
     "name": "Cranberry",
 	"company": "Ocean Spray",
-        "desc": "Cran it Gran"
+        "desc": "Cran it Gran",
+        "type": "juice",
     },
        "Chardonnay": {
     "name": "Chardonnay",
     "company": "Cupcake",
     "imgurl": "http://2.bp.blogspot.com/-fUEQ1T-q9so/T-pHNHW4N3I/AAAAAAAACPc/07bz5r_BxQc/s1600/wine-chardonnay.png",
-    "desc": "Don't have much money but don't want to buy yellowtail or Barefoot? Well I've got a wine for you!"
+    "desc": "Don't have much money but don't want to buy yellowtail or Barefoot? Well I've got a wine for you!",
+           "type": "wine",
     },
     "Hendrick's":{
 	"imgurl": "https://www.laithwaites.co.uk/images/uk/en/law/product/73152b.png",
     "name": "Hendrick's",
 	"company": "Hendrick's",
-    "desc": "It's a gin"
+    "desc": "It's a gin",
+    "type": "liquor",
     }
 };
 
@@ -137,15 +143,9 @@ const addDrink = (request, response, body) => {
 
 const getDrinkPage = (request, response, typ) => {
     
-    let fixedType = typ;
-    
-    if( typ.includes("%20", 0) ){
-        
-       fixedType = typ.replace("%20", " ");
-      
-    }
-    
-      console.log(drinks[fixedType]);
+    let fixedType = decodeURI(typ);
+       
+    //console.log(drinks[fixedType]);
     
     const requestedDrink = drinks[fixedType];
     
@@ -155,6 +155,35 @@ const getDrinkPage = (request, response, typ) => {
     return respondJSON(request, response, 200, responseJSON);
 };
 
+const sortDrinks = (request, response, query) => {
+    const querys = query.split('=');
+    const sortedDrinks = {};
+    
+   
+    
+    let keys = Object.keys(drinks);
+    
+    for(let i = 0; i < keys.length; i++){
+    
+        if(drinks[keys[i]].type === querys[1]){
+            
+            if(sortedDrinks[drinks[keys[i]].name]){
+                
+            }else{
+            sortedDrinks[drinks[keys[i]].name] = drinks[keys[i]];
+            }
+        }
+    };
+    
+     const responseJSON = {
+         sortedDrinks,
+     };
+    
+     return respondJSON(request, response, 200, responseJSON);
+};
+
+
+
 // public exports
 module.exports = {
     getDrinkPage,
@@ -163,4 +192,5 @@ module.exports = {
     notFound,
     notFoundMeta,
     addDrink,
+    sortDrinks,
 };
